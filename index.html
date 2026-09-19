@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand of Kings | Tienda Oficial</title>
+    <style>
+        * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, sans-serif;}
+        body {background:#ffffff; color:#1a1a1a; min-height:100vh; line-height:1.6;}
+        header {background:linear-gradient(135deg, #ffd700 0%, #ffb300 100%); padding:2.5rem 1.5rem; text-align:center; box-shadow:0 4px 20px rgba(218,165,32,0.3); position:relative;}
+        .logo {font-size:2.8rem; font-weight:900; color:#000; letter-spacing:3px;}
+        .admin-acceso {position:absolute; top:1rem; right:1rem; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,0.1); border:none; cursor:pointer; opacity:0.3; transition:all 0.3s ease;}
+        .admin-acceso:hover {opacity:1; background:rgba(0,0,0,0.2);}
+        .contenedor {max-width:1200px; margin:0 auto; padding:1rem;}
+        .titulo-seccion {text-align:center; margin:2rem 0 1rem; font-size:1.8rem; font-weight:700; color:#000;}
+        .productos {display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2rem; padding:1rem 0 3rem;}
+        .tarjeta {background:#fff; border:2px solid #ffd700; border-radius:16px; overflow:hidden; box-shadow:0 6px 15px rgba(0,0,0,0.06); transition:all 0.3s ease; position:relative;}
+        .tarjeta:hover {transform:translateY(-8px); box-shadow:0 12px 25px rgba(0,0,0,0.12);}
+        .etiqueta-nuevo {position:absolute; top:1rem; left:1rem; background:#ffd700; color:#000; padding:0.3rem 0.8rem; border-radius:20px; font-size:0.75rem; font-weight:bold; text-transform:uppercase;}
+        .prod-imagen {width:100%; height:220px; object-fit:cover; background:#f8f8f8;}
+        .prod-info {padding:1.5rem;}
+        .prod-nombre {font-size:1.4rem; font-weight:700; color:#000; margin-bottom:0.5rem;}
+        .prod-desc {color:#555; font-size:0.95rem; margin-bottom:1rem;}
+        .prod-precio {font-size:1.8rem; font-weight:900; color:#b8860b;}
+        .prod-boton {display:inline-block; margin-top:1rem; background:#000; color:#ffd700; padding:0.9rem 2rem; border-radius:8px; text-decoration:none; font-weight:bold; transition:all 0.3s ease;}
+        .prod-boton:hover {background:#222; transform:scale(1.05);}
+        .panel {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:200; overflow-y:auto; padding:2rem;}
+        .panel-contenido {background:#fff; max-width:600px; margin:0 auto; padding:2.5rem; border-radius:16px; position:relative; box-shadow:0 10px 30px rgba(0,0,0,0.3);}
+        .cerrar {position:absolute; top:1rem; right:1rem; font-size:1.5rem; cursor:pointer; color:#666; width:32px; height:32px; border-radius:50%; background:#f0f0f0; display:flex; align-items:center; justify-content:center;}
+        .cerrar:hover {background:#e0e0e0;}
+        .form-group {margin-bottom:1rem;}
+        label {display:block; margin-bottom:0.5rem; color:#333; font-weight:600;}
+        input, textarea {width:100%; padding:0.9rem; border:2px solid #ddd; border-radius:8px; font-size:1rem; transition:border-color 0.3s ease;}
+        input:focus, textarea:focus {outline:none; border-color:#ffd700;}
+        button[type="submit"] {width:100%; background:linear-gradient(90deg, #ffd700, #ffb300); color:#000; font-weight:bold; border:none; cursor:pointer; font-size:1.1rem; padding:1rem; border-radius:8px; transition:all 0.3s ease;}
+        button[type="submit"]:hover {transform:translateY(-2px); box-shadow:0 5px 15px rgba(255,215,0,0.4);}
+        .clave {max-width:400px; margin:8rem auto; text-align:center;}
+        .clave h2 {color:#ffd700; margin-bottom:2rem; font-size:1.5rem;}
+        footer {background:#000; color:#ffd700; text-align:center; padding:1.5rem; margin-top:3rem;}
+        @media (max-width:768px) {.logo{font-size:2rem;} .productos{grid-template-columns:1fr;} .panel-contenido{padding:1.5rem;}}
+    </style>
+</head>
+<body>
+    <header>
+        <button class="admin-acceso" onclick="abrirPanel()"></button>
+        <div class="logo">BRAND OF KINGS</div>
+    </header>
+    <main class="contenedor">
+        <h2 class="titulo-seccion">Productos destacados</h2>
+        <section class="productos" id="listaProductos"></section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Brand of Kings. Todos los derechos reservados.</p>
+    </footer>
+
+    <div class="panel" id="panelAdmin">
+        <div class="panel-contenido">
+            <span class="cerrar" onclick="cerrarPanel()">&times;</span>
+            <h2 style="margin-bottom:1.5rem; text-align:center;">Agregar Producto</h2>
+            <form id="formProducto">
+                <div class="form-group">
+                    <label>Nombre del producto</label>
+                    <input type="text" id="prodNombre" required placeholder="Ej: Camisa Clásica Premium">
+                </div>
+                <div class="form-group">
+                    <label>Precio</label>
+                    <input type="text" id="prodPrecio" required placeholder="Ej: $350 MXN">
+                </div>
+                <div class="form-group">
+                    <label>Enlace de la foto</label>
+                    <input type="url" id="prodFoto" required placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+                <div class="form-group">
+                    <label>Descripción (opcional)</label>
+                    <textarea id="prodDesc" rows="3" placeholder="Ej: Diseño exclusivo, tela de alta calidad."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Enlace de compra</label>
+                    <input type="url" id="prodEnlace" required placeholder="https://link-de-compra.com">
+                </div>
+                <button type="submit">Publicar Producto</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel" id="pantallaClave">
+        <div class="clave">
+            <h2>Acceso exclusivo para administrador</h2>
+            <input type="password" id="claveAdmin" placeholder="Escribe tu clave">
+            <button onclick="verificarClave()" style="background:#ffd700; border:none; margin-top:1rem; padding:0.9rem 2rem; border-radius:8px; font-weight:bold;">Ingresar</button>
+        </div>
+    </div>
+
+<script>
+    const CLAVE_SECRETA = "BK2025Admin$";
+    let productos = JSON.parse(localStorage.getItem('productosBK')) || [];
+    mostrarProductos();
+
+    function abrirPanel() {
+        if (sessionStorage.getItem('autorizado') === 'si') {
+            document.getElementById('panelAdmin').style.display = 'block';
+        } else {
+            document.getElementById('pantallaClave').style.display = 'block';
+        }
+    }
+
+    function cerrarPanel() {
+        document.getElementById('panelAdmin').style.display = 'none';
+    }
+
+    function verificarClave() {
+        const clave = document.getElementById('claveAdmin').value;
+        if (clave === CLAVE_SECRETA) {
+            sessionStorage.setItem('autorizado', 'si');
+            document.getElementById('pantallaClave').style.display = 'none';
+            document.getElementById('panelAdmin').style.display = 'block';
+            document.getElementById('claveAdmin').value = '';
+        } else {
+            alert('Clave incorrecta');
+        }
+    }
+
+    document.getElementById('formProducto').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nuevo = {
+            nombre: document.getElementById('prodNombre').value,
+            precio: document.getElementById('prodPrecio').value,
+            foto: document.getElementById('prodFoto').value,
+            desc: document.getElementById('prodDesc').value || 'Producto exclusivo Brand of Kings',
+            enlace: document.getElementById('prodEnlace').value,
+            fecha: new Date().toISOString()
+        };
+        productos.unshift(nuevo);
+        localStorage.setItem('productosBK', JSON.stringify(productos));
+        this.reset();
+        cerrarPanel();
+        mostrarProductos();
+        alert('Producto publicado correctamente');
+    });
+
+    function mostrarProductos() {
+        const contenedor = document.getElementById('listaProductos');
+        contenedor.innerHTML = '';
+        if (productos.length === 0) {
+            contenedor.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#888; padding:3rem;">Próximamente nuevos diseños</p>';
+            return;
+        }
+        productos.forEach(p => {
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'tarjeta';
+            tarjeta.style.position = 'relative';
+            tarjeta.innerHTML = `
+                <span class="etiqueta-nuevo">Nuevo</span>
+                <img src="${p.foto}" alt="${p.nombre}" class="prod-imagen" onerror="this.src='https://via.placeholder.com/600x400/ffd700/000?text=Brand+of+Kings'">
+                <div class="prod-info">
+                    <h3 class="prod-nombre">${p.nombre}</h3>
+                    <p class="prod-desc">${p.desc}</p>
+                    <div class="prod-precio">${p.precio}</div>
+                    <a href="${p.enlace}" target="_blank" class="prod-boton">Pedir Ahora</a>
+                </div>
+            `;
+            contenedor.appendChild(tarjeta);
+        });
+    }
+</script>
+</body>
+  </html>
+  
