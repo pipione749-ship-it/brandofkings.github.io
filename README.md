@@ -1,2 +1,2 @@
-# brandofkings.github.io
-Brand of kings 
+# Brand of Kings 👑
+Sitio oficial: pipione749.github.io/brandofkings
