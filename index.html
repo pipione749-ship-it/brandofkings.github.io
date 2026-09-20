@@ -1,168 +1,258 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brand of Kings | Tienda Oficial</title>
-    <style>
-        * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, sans-serif;}
-        body {background:#ffffff; color:#1a1a1a; min-height:100vh; line-height:1.6;}
-        header {background:linear-gradient(135deg, #ffd700 0%, #ffb300 100%); padding:2.5rem 1.5rem; text-align:center; box-shadow:0 4px 20px rgba(218,165,32,0.3); position:relative;}
-        .logo {font-size:2.8rem; font-weight:900; color:#000; letter-spacing:3px;}
-        .admin-acceso {position:absolute; top:1rem; right:1rem; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,0.1); border:none; cursor:pointer; opacity:0.3; transition:all 0.3s ease;}
-        .admin-acceso:hover {opacity:1; background:rgba(0,0,0,0.2);}
-        .contenedor {max-width:1200px; margin:0 auto; padding:1rem;}
-        .titulo-seccion {text-align:center; margin:2rem 0 1rem; font-size:1.8rem; font-weight:700; color:#000;}
-        .productos {display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2rem; padding:1rem 0 3rem;}
-        .tarjeta {background:#fff; border:2px solid #ffd700; border-radius:16px; overflow:hidden; box-shadow:0 6px 15px rgba(0,0,0,0.06); transition:all 0.3s ease; position:relative;}
-        .tarjeta:hover {transform:translateY(-8px); box-shadow:0 12px 25px rgba(0,0,0,0.12);}
-        .etiqueta-nuevo {position:absolute; top:1rem; left:1rem; background:#ffd700; color:#000; padding:0.3rem 0.8rem; border-radius:20px; font-size:0.75rem; font-weight:bold; text-transform:uppercase;}
-        .prod-imagen {width:100%; height:220px; object-fit:cover; background:#f8f8f8;}
-        .prod-info {padding:1.5rem;}
-        .prod-nombre {font-size:1.4rem; font-weight:700; color:#000; margin-bottom:0.5rem;}
-        .prod-desc {color:#555; font-size:0.95rem; margin-bottom:1rem;}
-        .prod-precio {font-size:1.8rem; font-weight:900; color:#b8860b;}
-        .prod-boton {display:inline-block; margin-top:1rem; background:#000; color:#ffd700; padding:0.9rem 2rem; border-radius:8px; text-decoration:none; font-weight:bold; transition:all 0.3s ease;}
-        .prod-boton:hover {background:#222; transform:scale(1.05);}
-        .panel {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:200; overflow-y:auto; padding:2rem;}
-        .panel-contenido {background:#fff; max-width:600px; margin:0 auto; padding:2.5rem; border-radius:16px; position:relative; box-shadow:0 10px 30px rgba(0,0,0,0.3);}
-        .cerrar {position:absolute; top:1rem; right:1rem; font-size:1.5rem; cursor:pointer; color:#666; width:32px; height:32px; border-radius:50%; background:#f0f0f0; display:flex; align-items:center; justify-content:center;}
-        .cerrar:hover {background:#e0e0e0;}
-        .form-group {margin-bottom:1rem;}
-        label {display:block; margin-bottom:0.5rem; color:#333; font-weight:600;}
-        input, textarea {width:100%; padding:0.9rem; border:2px solid #ddd; border-radius:8px; font-size:1rem; transition:border-color 0.3s ease;}
-        input:focus, textarea:focus {outline:none; border-color:#ffd700;}
-        button[type="submit"] {width:100%; background:linear-gradient(90deg, #ffd700, #ffb300); color:#000; font-weight:bold; border:none; cursor:pointer; font-size:1.1rem; padding:1rem; border-radius:8px; transition:all 0.3s ease;}
-        button[type="submit"]:hover {transform:translateY(-2px); box-shadow:0 5px 15px rgba(255,215,0,0.4);}
-        .clave {max-width:400px; margin:8rem auto; text-align:center;}
-        .clave h2 {color:#ffd700; margin-bottom:2rem; font-size:1.5rem;}
-        footer {background:#000; color:#ffd700; text-align:center; padding:1.5rem; margin-top:3rem;}
-        @media (max-width:768px) {.logo{font-size:2rem;} .productos{grid-template-columns:1fr;} .panel-contenido{padding:1.5rem;}}
-    </style>
-</head>
-<body>
-    <header>
-        <button class="admin-acceso" onclick="abrirPanel()"></button>
-        <div class="logo">BRAND OF KINGS</div>
-    </header>
-    <main class="contenedor">
-        <h2 class="titulo-seccion">Productos destacados</h2>
-        <section class="productos" id="listaProductos"></section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Brand of Kings. Todos los derechos reservados.</p>
-    </footer>
+<!doctype html>
+<html lang="es"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260918-05-13efa67","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YACgEZulLoA,0","Arial Narrow":"YAGyDvJ_4Ts,0","Arial Rounded MT Bold":"YAFcfoaHu-s,0","Arial":"YAGyDvJ_4Ts,0","Avenir Next":"YAFcfmNq6UY,0","Baloo 2":"YADK30bC6HQ,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Broken Glyph":"YADZ-exUkv0,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAFcfvtOAUY,1","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Georgia":"YAGzXkO0pEM,0","Ghost Mono":"YAHQutsX00Q,0","Hanken Grotesk":"YAFcfhwp99E,0","Helvetica Neue":"YAFcf6CtJfI,0","Helvetica":"YAFcf6CtJfI,0","IBM Plex Mono":"YAFdJkmvhGI,0","Impact":"YAFcfnjI7Vk,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YADK3zbC6RM,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Oswald":"YACgEQY10lw,0","Pacifico":"YADLjORQ1u4,0","Phantom Sans":"YAFdJvgJ5TU,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAGvf3_u0_Q,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Source Serif 4":"YACgEfdj394,0","Space Grotesk":"YADZ-dYEmhg,0","Space Mono":"YADW1-vpsoc,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","UV Display":"YAEdVfSSpYo,0","UV Sans":"YAFdJvgJ5TU,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YAD1aFjegN8,0","ui-sans-serif":"YACkoD1yZN0,0"}}');</script><script src="/_sdk/83d6dfdadcd4750a.telemetry_sdk.js" integrity="sha512-XS4Dvzp6vbagZS9vFErihvr8aO3S0tH78KWUefn06fmL4WYqryBtZj/IOLITYj7dFA4gPVvPg1W/JB1DK3uLNQ=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Interactiva</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #112b3c;
+      --mist: rgba(248, 252, 251, 0.84);
+      --line: rgba(255, 255, 255, 0.72);
+      --deep-teal: #0a5361;
+    }
 
-    <div class="panel" id="panelAdmin">
-        <div class="panel-contenido">
-            <span class="cerrar" onclick="cerrarPanel()">&times;</span>
-            <h2 style="margin-bottom:1.5rem; text-align:center;">Agregar Producto</h2>
-            <form id="formProducto">
-                <div class="form-group">
-                    <label>Nombre del producto</label>
-                    <input type="text" id="prodNombre" required placeholder="Ej: Camisa Clásica Premium">
-                </div>
-                <div class="form-group">
-                    <label>Precio</label>
-                    <input type="text" id="prodPrecio" required placeholder="Ej: $350 MXN">
-                </div>
-                <div class="form-group">
-                    <label>Enlace de la foto</label>
-                    <input type="url" id="prodFoto" required placeholder="https://ejemplo.com/imagen.jpg">
-                </div>
-                <div class="form-group">
-                    <label>Descripción (opcional)</label>
-                    <textarea id="prodDesc" rows="3" placeholder="Ej: Diseño exclusivo, tela de alta calidad."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Enlace de compra</label>
-                    <input type="url" id="prodEnlace" required placeholder="https://link-de-compra.com">
-                </div>
-                <button type="submit">Publicar Producto</button>
-            </form>
-        </div>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      font-family: "DM Sans", sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    .app-wrapper {
+      position: relative;
+      isolation: isolate;
+      width: 100%;
+      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      overflow: hidden;
+    }
+
+    .ambient-field,
+    .ambient-orb,
+    .ambient-ribbon {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .ambient-field {
+      z-index: -3;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 252, 224, 0.9) 0, rgba(255, 252, 224, 0) 32%),
+        radial-gradient(circle at 82% 84%, rgba(255, 226, 153, 0.72) 0, rgba(255, 226, 153, 0) 35%),
+        linear-gradient(135deg, #fffdf2 0%, #f8efd2 45%, #ead9a4 100%);
+    }
+
+    .ambient-orb {
+      z-index: -2;
+      border-radius: 999px;
+      filter: blur(14px);
+      opacity: 0.72;
+      will-change: transform;
+    }
+
+    .orb-one {
+      width: min(52vw, 680px);
+      aspect-ratio: 1;
+      top: -18%;
+      right: -11%;
+      background: radial-gradient(circle at 32% 30%, rgba(255, 249, 210, 0.9), rgba(255, 249, 210, 0.04) 68%);
+      animation: drift-one 19s ease-in-out infinite alternate;
+    }
+
+    .orb-two {
+      width: min(45vw, 570px);
+      aspect-ratio: 1;
+      bottom: -23%;
+      left: -13%;
+      background: radial-gradient(circle at 55% 45%, rgba(255, 214, 118, 0.72), rgba(255, 214, 118, 0.03) 70%);
+      animation: drift-two 24s ease-in-out infinite alternate;
+    }
+
+    .orb-three {
+      width: min(28vw, 390px);
+      aspect-ratio: 1;
+      top: 38%;
+      left: 42%;
+      background: radial-gradient(circle, rgba(255, 248, 211, 0.42), rgba(255, 248, 211, 0) 68%);
+      animation: breathe 13s ease-in-out infinite alternate;
+    }
+
+    .ambient-ribbon {
+      z-index: -1;
+      width: 130%;
+      height: 230px;
+      left: -16%;
+      top: 44%;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 72px rgba(255, 255, 255, 0.28);
+      transform: rotate(-10deg);
+      animation: glide 20s ease-in-out infinite alternate;
+    }
+
+    .page-grid {
+      background-image:
+        linear-gradient(rgba(20, 93, 105, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20, 93, 105, 0.045) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+    }
+
+    .glass-panel {
+      background: var(--mist);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 70px rgba(13, 77, 89, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .soft-reveal {
+      animation: reveal 800ms cubic-bezier(.16, 1, .3, 1) both;
+    }
+
+    .motion-control {
+      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+    }
+
+    .motion-control:hover { transform: translateY(-2px); }
+    .motion-control:focus-visible {
+      outline: 3px solid #0a5361;
+      outline-offset: 3px;
+    }
+
+    .is-static .ambient-orb,
+    .is-static .ambient-ribbon {
+      animation-play-state: paused;
+    }
+
+    .is-static .orb-one { transform: translate3d(-4%, 3%, 0) scale(0.96); }
+    .is-static .orb-two { transform: translate3d(5%, -4%, 0) scale(0.98); }
+    .is-static .orb-three { transform: scale(0.94); }
+
+    .toggle-play,
+    .status-static { display: none; }
+
+    .is-static .toggle-pause,
+    .is-static .status-animated { display: none; }
+
+    .is-static .toggle-play,
+    .is-static .status-static { display: inline; }
+
+    @keyframes drift-one {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(-12%, 13%, 0) scale(1.12); }
+    }
+
+    @keyframes drift-two {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(18%, -11%, 0) scale(1.13); }
+    }
+
+    @keyframes breathe {
+      from { transform: translate3d(-5%, -8%, 0) scale(0.86); opacity: 0.4; }
+      to { transform: translate3d(10%, 8%, 0) scale(1.18); opacity: 0.7; }
+    }
+
+    @keyframes glide {
+      from { transform: translate3d(-4%, -2%, 0) rotate(-10deg) scaleX(0.96); }
+      to { transform: translate3d(9%, 8%, 0) rotate(-5deg) scaleX(1.08); }
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .orb-one { width: 86vw; right: -34%; top: -10%; }
+      .orb-two { width: 86vw; left: -40%; bottom: -14%; }
+      .orb-three { width: 58vw; left: 22%; }
+      .ambient-ribbon { top: 55%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+
+      .ambient-orb,
+      .ambient-ribbon {
+        animation: none !important;
+      }
+
+      .orb-one { transform: translate3d(-4%, 3%, 0) scale(0.96); }
+      .orb-two { transform: translate3d(5%, -4%, 0) scale(0.98); }
+      .orb-three { transform: scale(0.94); }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="/_sdk/8de366929c5f3b48.data_sdk.js" type="text/javascript" integrity="sha512-TyQ8k8cZj66xe/aENmn6RyZpdOFZXbAo5+KBG3PeFM+Q4qMTHU8xAqmq4ADClNfPrstgQYV6OzZHwLTnElzB2g=="></script>
+  <script src="/_sdk/0ddbbee1c66b1212.editing_sdk.js" type="text/javascript" integrity="sha512-HQn5LM1yruQSbY78ATUril6QeOJ9xj7KqO64ltLtb4vBwI5Qv3/tloFFOndBPZTNZoeV5xKzuth5y6FTi9crsg=="></script>
+  <script src="/_sdk/765e1fea0cec97ce.resizing_sdk.js" type="text/javascript" integrity="sha512-IRTJnqww0+HQ5V/LlWEQrlD5SrYHaVvaeVoNe8HYQXoaguzUGheSd9+n9s6WOgaTcEH0g37DuINHZ9aqfzWjlw=="></script>
+ </head>
+ <body data-template-id="__page-root" style="background: linear-gradient(135deg, rgb(255, 253, 242), rgb(234, 217, 164));">
+  <div id="app" class="app-wrapper">
+   <div class="ambient-field"></div>
+   <div class="ambient-orb orb-one"></div>
+   <div class="ambient-orb orb-two"></div>
+   <div class="ambient-orb orb-three"></div>
+   <div class="ambient-ribbon"></div>
+   <div class="page-grid absolute inset-0 z-[-1]"></div>
+   <header data-template-id="page-header" class="canva-header w-full px-5 py-5 sm:px-8 sm:py-7" style="background: rgba(255, 255, 255, 0.08);">
+    <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4">
+     <h1 data-template-id="page-title" class="canva-text font-semibold tracking-tight" style="color: rgb(17, 43, 60); font-weight: 600; font-style: normal; font-size: 32px;">LÚMINA / ROPA</h1>
+     <nav data-template-id="store-nav" class="canva-menu hidden items-center gap-5 md:flex" style="color: rgb(10, 83, 97);">
+      <a data-template-id="nav-catalog" class="canva-link" href="#catalogo" style="color: rgb(10, 83, 97); font-weight: 400; font-style: normal; font-size: 16px;">Catálogo</a><a data-template-id="nav-categories" class="canva-link" href="#categorias" style="color: rgb(10, 83, 97); font-weight: 400; font-style: normal; font-size: 16px;">Categorías</a>
+     </nav>
+     <div class="flex items-center gap-2">
+      <button id="cart-button" data-template-id="cart-button" class="canva-button motion-control rounded-full px-4 py-2 font-semibold" type="button" style="background: rgb(255, 255, 255); color: rgb(10, 83, 97); font-weight: 700;"><i data-lucide="shopping-bag" class="mr-1 inline h-4 w-4"></i><span data-template-id="cart-label" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 16px;">Carrito</span> <b id="cart-count">0</b></button><button id="motion-button" data-template-id="motion-toggle" class="canva-button motion-control rounded-full px-3 py-2" type="button" aria-pressed="false" style="background: rgb(255, 255, 255); color: rgb(10, 83, 97);"><i data-lucide="pause" class="toggle-pause h-4 w-4"></i><i data-lucide="play" class="toggle-play h-4 w-4"></i></button>
+     </div>
     </div>
-
-    <div class="panel" id="pantallaClave">
-        <div class="clave">
-            <h2>Acceso exclusivo para administrador</h2>
-            <input type="password" id="claveAdmin" placeholder="Escribe tu clave">
-            <button onclick="verificarClave()" style="background:#ffd700; border:none; margin-top:1rem; padding:0.9rem 2rem; border-radius:8px; font-weight:bold;">Ingresar</button>
-        </div>
-    </div>
-
-<scrip
-    const CLAVE_SECRETA = "JCN";
-    let productos = JSON.parse(localStorage.getItem('productosBK')) || [];
-    mostrarProductos();
-
-    function abrirPanel() {
-        if (sessionStorage.getItem('autorizado') === 'si') {
-            document.getElementById('panelAdmin').style.display = 'block';
-        } else {
-            document.getElementById('pantallaClave').style.display = 'block';
-        }
-    }
-
-    function cerrarPanel() {
-        document.getElementById('panelAdmin').style.display = 'none';
-    }
-
-    function verificarClave() {
-        const clave = document.getElementById('claveAdmin').value;
-        if (clave === CLAVE_SECRETA) {
-            sessionStorage.setItem('autorizado', 'si');
-            document.getElementById('pantallaClave').style.display = 'none';
-            document.getElementById('panelAdmin').style.display = 'block';
-            document.getElementById('claveAdmin').value = '';
-        } else {
-            alert('Clave incorrecta');
-        }
-    }
-
-    document.getElementById('formProducto').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const nuevo = {
-            nombre: document.getElementById('prodNombre').value,
-            precio: document.getElementById('prodPrecio').value,
-            foto: document.getElementById('prodFoto').value,
-            desc: document.getElementById('prodDesc').value || 'Producto exclusivo Brand of Kings',
-            enlace: document.getElementById('prodEnlace').value,
-            fecha: new Date().toISOString()
-        };
-        productos.unshift(nuevo);
-        localStorage.setItem('productosBK', JSON.stringify(productos));
-        this.reset();
-        cerrarPanel();
-        mostrarProductos();
-        alert('Producto publicado correctamente');
-    });
-
-    function mostrarProductos() {
-        const contenedor = document.getElementById('listaProductos');
-        contenedor.innerHTML = '';
-        if (productos.length === 0) {
-            contenedor.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#888; padding:3rem;">Próximamente nuevos diseños</p>';
-            return;
-        }
-        productos.forEach(p => {
-            const tarjeta = document.createElement('div');
-            tarjeta.className = 'tarjeta';
-            tarjeta.style.position = 'relative';
-            tarjeta.innerHTML = `
-                <span class="etiqueta-nuevo">Nuevo</span>
-                <img src="${p.foto}" alt="${p.nombre}" class="prod-imagen" onerror="this.src='https://via.placeholder.com/600x400/ffd700/000?text=Brand+of+Kings'">
-                <div class="prod-info">
-                    <h3 class="prod-nombre">${p.nombre}</h3>
-                    <p class="prod-desc">${p.desc}</p>
-                    <div class="prod-precio">${p.precio}</div>
-                    <a href="${p.enlace}" target="_blank" class="prod-boton">Pedir Ahora</a>
-                </div>
-            `;
-            contenedor.appendChild(tarjeta);
-        });
-    }
-</script>
-</body>
-  </html>
-  
+   </header>
+   <main class="mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8">
+    <section data-template-id="hero-section" class="canva-section glass-panel soft-reveal mb-7 rounded-[2rem] p-6 sm:p-10" style="background: rgba(248, 252, 251, 0.84);">
+     <p data-template-id="content-eyebrow" class="canva-text mb-3 uppercase tracking-[0.18em]" style="color: rgb(10, 83, 97); font-weight: 700; font-style: normal; font-size: 12px; letter-spacing: 0.12rem;">Boutique pública · Guadalajara</p>
+     <h2 data-template-id="content-title" class="canva-text max-w-2xl font-semibold leading-tight" style="color: rgb(17, 43, 60); font-weight: 600; font-style: normal; font-size: 36px;">Ropa que ilumina tu forma de estar.</h2>
+     <p data-template-id="content-description" class="canva-text mt-4 max-w-xl leading-relaxed" style="color: rgb(49, 82, 96); font-weight: 400; font-style: normal; font-size: 18px; line-height: 1.6;">Descubre prendas y accesorios seleccionados con una mirada moderna, luminosa y sin complicaciones.</p>
+     <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+      <label class="sr-only" for="search">Buscar prendas</label>
+      <div class="flex flex-1 items-center rounded-full bg-white/75 px-4">
+       <i data-lucide="search" class="h-4 w-4"></i><input id="search" data-template-id="search-input" class="canva-input w-full bg-transparent px-3 py-3 outline-none" type="search" placeholder="Buscar prendas..." style="color: rgb(17, 43, 60); font-weight: 400; font-style: normal; font-size: 16px;">
+      </div><button id="publish-open" data-template-id="publish-button" class="canva-button motion-control rounded-full px-5 py-3 font-semibold" type="button" style="background: rgb(10, 83, 97); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Publicar ropa</button>
+     </div>
+    </section>
+    <section id="categorias" class="mb-7 flex flex-wrap gap-2" aria-label="Categorías">
+     <button data-template-id="category-all" class="category-button rounded-full px-4 py-2" data-category="Todas" type="button" style="background: rgb(255, 255, 255); color: rgb(10, 83, 97); font-weight: 400; font-style: normal; font-size: 16px;">Todas</button><button data-template-id="category-ropa" class="category-button rounded-full px-4 py-2" data-category="Ropa" type="button" style="background: rgb(255, 255, 255); color: rgb(10, 83, 97); font-weight: 400; font-style: normal; font-size: 16px;">Ropa</button><button data-template-id="category-accesorios" class="category-button rounded-full px-4 py-2" data-category="Accesorios" type="button" style="background: rgb(255, 255, 255); color: rgb(10, 83, 97); font-weight: 400; font-style: normal; font-size: 16px;">Accesorios</button>
+    </section>
+    <section id="catalogo">
+     <div class="mb-4 flex items-end justify-between">
+      <h2 data-template-id="catalog-title" class="canva-text font-semibold" style="color: rgb(17, 43, 60); font-weight: 600; font-style: normal; font-size: 24px;">Selección destacada</h2><span data-template-id="motion-status" class="canva-text text-sm" style="color: rgb(49, 82, 96);"><span class="status-animated">●</span><span data-template-id="motion-status-animated" class="canva-text status-animated" style="color: rgb(49, 82, 96); font-weight: 400; font-style: normal; font-size: 14px;">Movimiento activo</span><span data-template-id="motion-status-static" class="canva-text status-static" style="color: rgb(49, 82, 96); font-weight: 400; font-style: normal; font-size: 14px;">Modo estático</span></span>
+     </div>
+     <div id="product-grid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+    <form id="publish-form" data-template-id="publish-form" class="canva-panel mt-8 hidden rounded-3xl p-6" novalidate="" style="background: rgba(248, 252, 251, 0.92);">
+     <h2 data-template-id="form-title" class="canva-text mb-5 font-semibold" style="color: rgb(17, 43, 60); font-weight: 600; font-style: normal; font-size: 24px;">Publica una prenda</h2>
+     <div class="grid gap-4 sm:grid-cols-2">
+      <label class="canva-text">Nombre<input id="product-name" class="canva-input mt-1 w-full rounded-xl p-3" required=""></label><label class="canva-text">Precio<input id="product-price" class="canva-input mt-1 w-full rounded-xl p-3" type="number" min="0" step="0.01" required=""></label><label class="canva-text sm:col-span-2">Descripción<textarea id="product-description" class="canva-input mt-1 w-full rounded-xl p-3" rows="2" required=""></textarea></label><label class="canva-text">Categoría<select id="product-category" class="canva-input mt-1 w-full rounded-xl p-3"><option>Ropa</option><option>Accesorios</option></select></label><label class="canva-text">Imagen (URL)<input id="product-image" class="canva-input mt-1 w-full rounded-xl p-3" type="url" placeholder="https://..."></label>
+     </div>
+     <div class="mt-5 flex gap-3">
+      <button data-template-id="form-submit" class="canva-button rounded-full px-5 py-3 font-semibold" type="submit" style="background: rgb(10, 83, 97); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Publicar</button><button data-template-id="form-cancel" id="publish-cancel" class="canva-button rounded-full px-5 py-3" type="button" style="background: rgb(255, 255, 255); color: rgb(10, 83, 97); font-weight: 400; font-style: normal; font-size: 16px;">Cancelar</button>
+     </div>
+     <p id="form-message" class="mt-3" aria-live="polite"></p>
+    </form>
+   </main>
+  </div>
+  <script>
+  document.addEventListener('DOMContentLoaded',async()=>{const app=document.getElementById('app'),form=document.getElementById('publish-form'),grid=document.getElementById('product-grid'),cartCount=document.getElementById('cart-count');let products=[{name:'Vestido Alba',price:1299,description:'Corte fluido y acabado satinado.',category:'Ropa',image_url:'https://images.pexels.com/photos/17293344/pexels-photo-17293344.jpeg'},{name:'Textura Dorada',price:649,description:'Detalle elegante para elevar tu look.',category:'Accesorios',image_url:'https://images.pexels.com/photos/28716778/pexels-photo-28716778.jpeg'}],cart=0,filter='Todas';const render=()=>{const q=document.getElementById('search').value.toLowerCase();grid.innerHTML=products.filter(p=>(filter==='Todas'||p.category===filter)&&p.name.toLowerCase().includes(q)).map((p,i)=>`<article class="canva-card overflow-hidden rounded-3xl"><img class="canva-image h-64 w-full object-cover" src="${p.image_url||'https://images.pexels.com/photos/6021542/pexels-photo-6021542.jpeg'}" alt="${p.name}"><div class="p-5"><span class="text-xs uppercase tracking-widest opacity-70">${p.category}</span><h3 class="mt-2 font-semibold">${p.name}</h3><p class="mt-2 text-sm opacity-75">${p.description}</p><div class="mt-5 flex items-center justify-between"><strong>$${Number(p.price).toLocaleString('es-MX')}</strong><button class="add-cart canva-button rounded-full px-4 py-2 font-semibold" data-i="${i}" type="button">Añadir</button></div></div></article>`).join('')||'<p class="opacity-70">No encontramos prendas.</p>';document.querySelectorAll('.add-cart').forEach(b=>b.onclick=()=>{cart++;cartCount.textContent=cart});};document.getElementById('search').oninput=render;document.querySelectorAll('.category-button').forEach(b=>b.onclick=()=>{filter=b.dataset.category;render()});document.getElementById('publish-open').onclick=()=>form.classList.remove('hidden');document.getElementById('publish-cancel').onclick=()=>form.classList.add('hidden');form.onsubmit=async e=>{e.preventDefault();const p={name:document.getElementById('product-name').value,price:Number(document.getElementById('product-price').value),description:document.getElementById('product-description').value,category:document.getElementById('product-category').value,image_url:document.getElementById('product-image').value||'https://images.pexels.com/photos/6021542/pexels-photo-6021542.jpeg',created_at:new Date().toISOString()};products.push(p);render();form.reset();form.classList.add('hidden');document.getElementById('form-message').textContent='Prenda publicada.';if(window.dataSdk)await window.dataSdk.create(p)};const mb=document.getElementById('motion-button'),rm=matchMedia('(prefers-reduced-motion: reduce)');const stat=x=>{app.classList.toggle('is-static',x);mb.setAttribute('aria-pressed',x)};stat(rm.matches);mb.onclick=()=>stat(!app.classList.contains('is-static'));render();lucide.createIcons()});</script>
+ 
+</body></html>
